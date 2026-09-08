@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GoreeCloud Wallpapers</string>
+    <string-array name="partner_wallpapers">
+        <item>goreecloud_living_glaze</item>
+        <item>goreecloud_graphite</item>
+        <item>goreecloud_pearl</item>
+        <item>goreecloud_mesh</item>
+    </string-array>
+    <bool name="default_wallpapper_hidden">true</bool>
+</resources>
