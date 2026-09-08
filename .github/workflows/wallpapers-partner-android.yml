@@ -1,0 +1,63 @@
+name: GoreeCloud Wallpapers Partner APK
+
+on:
+  push:
+    paths:
+      - 'wallpapers-partner/**'
+      - '.github/workflows/wallpapers-partner-android.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: wallpapers-partner
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.11.1'
+
+      - name: Install renderer dependencies
+        run: python3 -m pip install --disable-pip-version-check cairosvg pillow
+
+      - name: Fetch canonical wallpaper masters
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p build/wallpaper-svg app/src/main/res/drawable-nodpi
+          base='https://raw.githubusercontent.com/GoreeCloud/goreecloud-branding-assets/b7af397b064e1a0d6095f530c9e3b822ce67cfd1/mobile/wallpapers'
+          curl -fsSL "$base/goreecloud-living-glaze.svg" -o build/wallpaper-svg/goreecloud_living_glaze.svg
+          curl -fsSL "$base/goreecloud-graphite.svg" -o build/wallpaper-svg/goreecloud_graphite.svg
+          curl -fsSL "$base/goreecloud-pearl.svg" -o build/wallpaper-svg/goreecloud_pearl.svg
+          curl -fsSL "$base/goreecloud-mesh.svg" -o build/wallpaper-svg/goreecloud_mesh.svg
+
+      - name: Render wallpaper resources
+        run: python3 tools/render_wallpapers.py build/wallpaper-svg app/src/main/res/drawable-nodpi
+
+      - name: Build Development APK
+        run: gradle --no-daemon :app:assembleDebug
+
+      - name: Stage artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          cp app/build/outputs/apk/debug/app-debug.apk dist/GoreeCloudWallpapersPartner.apk
+          sha256sum dist/GoreeCloudWallpapersPartner.apk > dist/SHA256SUMS
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: goreecloud-wallpapers-partner-android-dev
+          path: wallpapers-partner/dist/
+          if-no-files-found: error
