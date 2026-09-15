@@ -3,7 +3,7 @@ title: "GoreeCloud OS Mobile — Feature Roadmap"
 document_type: "Feature Roadmap"
 product: "GoreeCloud OS Mobile"
 status: "Active roadmap control"
-version: "v0.5"
+version: "v0.6"
 classification: "Internal"
 last_updated: "2026-09-15"
 repository: "GoreeCloud/goreecloud-os-mobile"
@@ -103,10 +103,38 @@ All feature rows below are planning obligations unless separate authoritative im
 | FR-073 | AOSP Compatibility | Unassigned | Planned |
 | FR-074 | Developer-Friendly Security | Unassigned | Planned |
 | FR-075 | GoreeCloud Ecosystem Integration | Unassigned | Planned |
+| FR-076 | Baseband and Radio Isolation | Unassigned | Planned |
+| FR-077 | SIM and eSIM Security and Privacy | Unassigned | Planned |
+| FR-078 | GoreeCloud DNS Integration | Unassigned | Planned |
+| FR-079 | Per-App DNS Policy | Unassigned | Planned |
+| FR-080 | Connection Monitor and Firewall Transparency | Unassigned | Planned |
+| FR-081 | Private Hotspot and Tethering | Unassigned | Planned |
+| FR-082 | Bluetooth Privacy and Permission Hardening | Unassigned | Planned |
+| FR-083 | NFC and UWB Privacy Controls | Unassigned | Planned |
+| FR-084 | Secure Nearby Discovery | Unassigned | Planned |
+| FR-085 | Secure Time and Rollback-Resistant Clock | Unassigned | Planned |
+| FR-086 | Hardware Key Lifecycle and Secure Key Destruction | Unassigned | Planned |
+| FR-087 | Credential Theft Resistance | Unassigned | Planned |
+| FR-088 | Package Provenance and Installation Transparency | Unassigned | Planned |
+| FR-089 | Reproducible Builds and Supply-Chain Verification | Unassigned | Planned |
+| FR-090 | Sideloading and Unknown-Source Controls | Unassigned | Planned |
+| FR-091 | Capability-Based Privileged APIs | Unassigned | Planned |
+| FR-092 | Sensitive Notification Protection | Unassigned | Planned |
+| FR-093 | Screen Capture and Sharing Controls | Unassigned | Planned |
+| FR-094 | Sensitive Content Redaction | Unassigned | Planned |
+| FR-095 | Isolated Application Clones | Unassigned | Planned |
+| FR-096 | Ephemeral Application Sessions | Unassigned | Planned |
+| FR-097 | Ephemeral User Sessions | Unassigned | Planned |
+| FR-098 | Recovery and Safe Mode Hardening | Unassigned | Planned |
+| FR-099 | Tamper-Evident Security Logs | Unassigned | Planned |
+| FR-100 | Machine-Readable Device Security Posture | Unassigned | Planned |
+| FR-101 | Accessibility Security and Privacy | Unassigned | Planned |
+| FR-102 | Battery and Power Privacy Controls | Unassigned | Planned |
+| FR-103 | Secure Factory Reset and Ownership Transfer | Unassigned | Planned |
 
 ## Requirement Mapping
 
-Detailed requirements for FR-004 through FR-075 are defined in Section 38, **Planned Features and Capabilities**, of the authoritative GoreeCloud OS Mobile project specification. The repository `SPECIFICATIONS.md` must remain materially aligned with that authoritative planned scope.
+Detailed requirements for FR-004 through FR-103 are defined in Section 38, **Planned Features and Capabilities**, of the authoritative GoreeCloud OS Mobile project specification. The repository `SPECIFICATIONS.md` must remain materially aligned with that authoritative planned scope.
 
 ## Maintenance and Synchronization
 
