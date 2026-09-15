@@ -3,7 +3,7 @@ title: "GoreeCloud OS Mobile — Feature Roadmap"
 document_type: "Feature Roadmap"
 product: "GoreeCloud OS Mobile"
 status: "Active roadmap control"
-version: "v0.6"
+version: "v0.7"
 classification: "Internal"
 last_updated: "2026-09-15"
 repository: "GoreeCloud/goreecloud-os-mobile"
@@ -131,10 +131,35 @@ All feature rows below are planning obligations unless separate authoritative im
 | FR-101 | Accessibility Security and Privacy | Unassigned | Planned |
 | FR-102 | Battery and Power Privacy Controls | Unassigned | Planned |
 | FR-103 | Secure Factory Reset and Ownership Transfer | Unassigned | Planned |
+| FR-104 | Permission Decision History and Explainability | Unassigned | Planned |
+| FR-105 | Permission Profiles and Templates | Unassigned | Planned |
+| FR-106 | Per-App Data Retention Controls | Unassigned | Planned |
+| FR-107 | Secure Share Broker | Unassigned | Planned |
+| FR-108 | Inter-App Data Flow Controls | Unassigned | Planned |
+| FR-109 | Localhost and Loopback Isolation | Unassigned | Planned |
+| FR-110 | IPC and Binder Access Transparency | Unassigned | Planned |
+| FR-111 | Background Wakeup Transparency | Unassigned | Planned |
+| FR-112 | App Hibernation and Dormancy | Unassigned | Planned |
+| FR-113 | JIT and Dynamic Code Policy | Unassigned | Planned |
+| FR-114 | Dynamic Code Loading Controls | Unassigned | Planned |
+| FR-115 | Native Library Provenance | Unassigned | Planned |
+| FR-116 | Memory-Safety Compatibility Modes | Unassigned | Planned |
+| FR-117 | Sandboxed Document Import Pipeline | Unassigned | Planned |
+| FR-118 | Download Quarantine and Content Verification | Unassigned | Planned |
+| FR-119 | Secure File Provenance and Origin Labels | Unassigned | Planned |
+| FR-120 | Secret Detection in Sharing Workflows | Unassigned | Planned |
+| FR-121 | Privacy-Preserving On-Device AI Controls | Unassigned | Planned |
+| FR-122 | Isolated Compute for High-Risk Workloads | Unassigned | Planned |
+| FR-123 | Secure Remote Assistance | Unassigned | Planned |
+| FR-124 | External Display Privacy | Unassigned | Planned |
+| FR-125 | Peripheral Trust and HID Protection | Unassigned | Planned |
+| FR-126 | Charging Accessory Trust | Unassigned | Planned |
+| FR-127 | Anti-Stalker and Rogue Tracker Detection | Unassigned | Planned |
+| FR-128 | Emergency Communications Resilience | Unassigned | Planned |
 
 ## Requirement Mapping
 
-Detailed requirements for FR-004 through FR-103 are defined in Section 38, **Planned Features and Capabilities**, of the authoritative GoreeCloud OS Mobile project specification. The repository `SPECIFICATIONS.md` must remain materially aligned with that authoritative planned scope.
+Detailed requirements for FR-004 through FR-128 are defined in Section 38, **Planned Features and Capabilities**, of the authoritative GoreeCloud OS Mobile project specification. The repository `SPECIFICATIONS.md` must remain materially aligned with that authoritative planned scope.
 
 ## Maintenance and Synchronization
 
