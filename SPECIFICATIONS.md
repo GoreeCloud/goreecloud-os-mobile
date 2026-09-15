@@ -5,7 +5,7 @@ product: "GoreeCloud OS Mobile"
 status: "Proposed"
 release_lifecycle: "Development"
 operational_phase: "Bring-up"
-version: "v0.5"
+version: "v0.6"
 classification: "Internal"
 last_updated: "2026-09-15"
 repository: "GoreeCloud/goreecloud-os-mobile"
@@ -26,7 +26,7 @@ This repository specification does not convert planned capabilities into impleme
 | Field | Current controlled value |
 | --- | --- |
 | Product | GoreeCloud OS Mobile |
-| Specification version | v0.5 |
+| Specification version | v0.6 |
 | Document status | Proposed |
 | Release lifecycle | Development |
 | Operational phase | Bring-up |
@@ -175,6 +175,36 @@ Every row in this section is **Planned** unless separate repository and qualific
 | FR-073 | AOSP Compatibility | Planned |
 | FR-074 | Developer-Friendly Security | Planned |
 | FR-075 | GoreeCloud Ecosystem Integration | Planned |
+| FR-076 | Baseband and Radio Isolation | Planned |
+| FR-077 | SIM and eSIM Security and Privacy | Planned |
+| FR-078 | GoreeCloud DNS Integration | Planned |
+| FR-079 | Per-App DNS Policy | Planned |
+| FR-080 | Connection Monitor and Firewall Transparency | Planned |
+| FR-081 | Private Hotspot and Tethering | Planned |
+| FR-082 | Bluetooth Privacy and Permission Hardening | Planned |
+| FR-083 | NFC and UWB Privacy Controls | Planned |
+| FR-084 | Secure Nearby Discovery | Planned |
+| FR-085 | Secure Time and Rollback-Resistant Clock | Planned |
+| FR-086 | Hardware Key Lifecycle and Secure Key Destruction | Planned |
+| FR-087 | Credential Theft Resistance | Planned |
+| FR-088 | Package Provenance and Installation Transparency | Planned |
+| FR-089 | Reproducible Builds and Supply-Chain Verification | Planned |
+| FR-090 | Sideloading and Unknown-Source Controls | Planned |
+| FR-091 | Capability-Based Privileged APIs | Planned |
+| FR-092 | Sensitive Notification Protection | Planned |
+| FR-093 | Screen Capture and Sharing Controls | Planned |
+| FR-094 | Sensitive Content Redaction | Planned |
+| FR-095 | Isolated Application Clones | Planned |
+| FR-096 | Ephemeral Application Sessions | Planned |
+| FR-097 | Ephemeral User Sessions | Planned |
+| FR-098 | Recovery and Safe Mode Hardening | Planned |
+| FR-099 | Tamper-Evident Security Logs | Planned |
+| FR-100 | Machine-Readable Device Security Posture | Planned |
+| FR-101 | Accessibility Security and Privacy | Planned |
+| FR-102 | Battery and Power Privacy Controls | Planned |
+| FR-103 | Secure Factory Reset and Ownership Transfer | Planned |
+
+The v0.6 continuation expands the catalog to 100 planned capabilities. The added capability families strengthen radio and subscription isolation, DNS and connection-policy transparency, nearby-radio privacy, trusted time, cryptographic-key lifecycle, credential-theft resistance, package provenance, reproducible supply-chain verification, sideloading controls, capability-scoped privileged APIs, sensitive notification and screen-sharing protection, local redaction, cloned/ephemeral execution, recovery hardening, tamper-evident evidence, machine-readable security posture, accessibility security, power-policy transparency, and secure ownership transfer.
 
 ## 7. Application Permissions and Data Isolation
 
@@ -182,9 +212,15 @@ The target permission model extends Android with clear, granular, independently 
 
 Planned scope-based access includes selected-file/folder storage views and selected-contact views rather than unnecessary access to entire user datasets. Identifier access should be minimized, randomized, app-scoped, or profile-scoped where practical. Applications should receive the minimum persistent hardware-identifying data needed to operate.
 
+Isolated application clones, ephemeral application sessions, and ephemeral user sessions should preserve separate state, permissions, network policy, identifiers where practical, and cryptographic boundaries without silently sharing credentials or private data.
+
 ## 8. Network Privacy and Connectivity Controls
 
 The target platform includes explicit per-application network policy, local-network separation, Wi-Fi identifier randomization, DHCP/probe privacy, secure DNS integration, configurable cellular modes including LTE-only and legacy-network restrictions where supported, carrier-app privilege minimization, VPN lockdown and leak protection, per-profile/per-app VPN policy, and user-controlled network kill-switch behavior.
+
+GoreeCloud DNS integration should remain optional and standards-compatible while enabling encrypted DNS, DNSSEC-aware behavior where applicable, profile-level DNS, per-app DNS policy, local filtering, self-hosted resolvers, and protected-DNS modes. DNS policy must not be represented as equivalent to network enforcement when applications can bypass DNS by connecting directly to IP addresses.
+
+Radio and connectivity hardening also includes planned baseband/radio isolation, SIM/eSIM privacy, private hotspot/tethering, Bluetooth privacy, NFC/UWB controls, and authenticated nearby discovery.
 
 Network controls must be enforced at the appropriate platform layer rather than represented as equivalent to a conventional user-space firewall when they are not.
 
@@ -195,6 +231,8 @@ Profiles should isolate applications, app data, accounts, contacts, files, media
 Profile logout should terminate processes, stop background activity, remove profile encryption keys from active memory where technically supported, and prevent application/notification activity until the profile is unlocked again.
 
 User data should use Android file-based encryption plus available hardware-backed key protection such as StrongBox, Trusted Execution Environment, Secure Element, credential throttling, hardware-bound derivation, and Verified Boot integration where the hardware and platform support them.
+
+The key lifecycle should cover generation, purpose limitation, rotation, non-exportability where appropriate, profile separation, revocation, lock-state-aware availability, and cryptographic destruction during profile deletion, factory reset, and ownership transfer.
 
 ## 10. Application Compatibility
 
@@ -216,7 +254,9 @@ Planned authentication supports PINs, long PINs, passwords, long passwords, hard
 
 Security controls include scrambled PIN entry, configurable auto-reboot to Before First Unlock after extended locked periods, optional duress credentials with strong accidental-activation safeguards, emergency lockdown, USB-C data/charging policies, USB-debugging restrictions, and user-visible hardware-resource kill switches.
 
-## 13. Updates, Boot Integrity, and Attestation
+Credential-theft resistance should protect sensitive prompts against deceptive overlays, make application identity visible during authentication, restrict inappropriate clipboard exposure of secrets and one-time codes, and favor protected autofill, passkeys, and phishing-resistant authenticators.
+
+## 13. Updates, Boot Integrity, Attestation, and Software Supply Chain
 
 The target release chain is GoreeCloud-controlled: authenticated release metadata, signed OS artifacts, staged rollout, A/B installation, boot verification, post-boot health verification, and rollback/recovery. Unsigned, incorrectly signed, modified, or unauthorized downgrade packages must be rejected.
 
@@ -224,9 +264,13 @@ The boot chain should use hardware-rooted secure boot, Android Verified Boot, pa
 
 Rapid security servicing should prioritize independently updatable security-sensitive components where technically appropriate, including browser/WebView, media, networking, cryptographic libraries, policies, compatibility services, and kernel components subject to Android/device architecture constraints.
 
+Release engineering should progressively support revision-pinned source manifests, build and dependency provenance, signed metadata, artifact hashes, SBOM generation, source-to-artifact traceability, release-signer verification, and reproducible or independently comparable builds where technically practical. Application installation should surface source, signer, signing lineage, update provenance, and unexpected signer changes.
+
 ## 14. Privacy and Security Observability
 
 The platform should provide a central privacy dashboard, real-time camera/microphone/location/screen indicators, application security/privacy summaries, network/domain visibility where safe and technically accurate, permission history, privacy-preserving crash-report controls, and a security-event viewer for relevant SELinux, MTE, exploit-prevention, integrity, permission, and network-block events.
+
+A connection monitor should distinguish observed network facts from inferred domain ownership or reputation. Tamper-evident logging may use append-only semantics, hash chaining, hardware-backed signing, monotonic counters, or protected timestamps when those mechanisms are justified and validated.
 
 Diagnostics and telemetry must remain user-controlled. Technical events should be translated into understandable explanations without hiding the underlying technical evidence from advanced users.
 
@@ -236,6 +280,8 @@ GoreeCloud Security Center should unify device security posture, Verified Boot, 
 
 Security presets may offer Standard, Enhanced, High Security, and Maximum Security policy bundles while preserving inspectable and individually configurable controls.
 
+A versioned machine-readable posture interface may expose independently verifiable security fields to authorized workflows, but no global score may substitute for the underlying evidence.
+
 ## 16. Everkeep, Backup, Recovery, and Migration
 
 Everkeep is the planned backup, restore, migration, continuity, and recovery platform. Encrypted backups may target GoreeCloud infrastructure, a self-hosted GoreeCloud Server, NAS, external storage, user-controlled cloud providers, or peer GoreeCloud devices. Encryption should occur before data leaves the device.
@@ -243,6 +289,8 @@ Everkeep is the planned backup, restore, migration, continuity, and recovery pla
 Zero-knowledge backup modes should be supported where practical so infrastructure need not possess decryption keys. Recovery options may include user passphrases, recovery keys, trusted devices, hardware security keys, and GoreeCloud Identity recovery mechanisms.
 
 Backup success must not be treated as restore proof. Recovery behavior, key availability, migration, rollback, and restoration must be validated before production-readiness claims.
+
+Recovery, bootloader, rescue, Safe Mode, factory reset, managed-device retirement, lost-device wipe, and ownership-transfer workflows are security boundaries and must preserve signing, encryption, provenance, explicit destructive confirmation, and accurate eSIM/account/management handling.
 
 ## 17. GoreeCloud Ecosystem Integrations
 
@@ -270,6 +318,10 @@ Trusted-device discovery and secure cross-device capabilities such as file trans
 
 Authorized remote device inventory, update visibility, security posture, application management, permission/profile policy, lost-device actions, backup status, and network configuration. Personal devices must retain clear user visibility and control over administrative authority.
 
+### GoreeCloud DNS
+
+Optional encrypted DNS, self-hosted resolver integration, filtering, profile and app policy, protected-DNS modes, and local-network resolution without making GoreeCloud infrastructure mandatory.
+
 ### Glaze UI
 
 System-wide visual and interaction language for transparent/translucent layered surfaces, adaptive opacity, depth, contextual color, motion, responsive transitions, privacy indicators, security-state visualization, accessibility, and consistent GoreeCloud identity.
@@ -282,13 +334,21 @@ The default software image should remain minimal: no carrier bloatware, sponsore
 
 GoreeCloud Camera should support modern photography functions while providing metadata controls and privacy-preserving sharing. GoreeCloud Dialer may support call recording where legally permitted, with user controls, secure storage, and appropriate notification behavior. Browser, Messenger, File Manager, Calendar, Health, Music, Video, Reader, and other first-party integrations must remain modular rather than forcing the entire ecosystem to be present.
 
+New privileged GoreeCloud APIs should prefer narrow, capability-based interfaces, explicit caller verification, profile-aware authorization, revocation, auditability, and fail-closed behavior instead of generalized first-party privilege.
+
 ## 19. Developer Requirements
 
 Developer functionality should be powerful but disabled by default on ordinary devices. Planned support includes ADB, wireless debugging, developer profiles, security logs, sandbox diagnostics, permission/network inspection, MTE debugging, StrictMode, profiling, and controlled rootless debugging environments.
 
 Development conveniences must not silently weaken production security policy or become prerequisites for normal operation.
 
-## 20. Validation and Qualification
+## 20. Accessibility, Presentation, and Sensitive Content
+
+Accessibility remains a core platform requirement. Accessibility services should receive clear explanations of their high-authority capabilities, remain visible and revocable, support per-profile configuration, and be tested under hardened modes so security controls do not make the platform unusable for people who depend on assistive technology.
+
+Sensitive notifications, screenshots, screen recordings, and screen-sharing workflows should support lock-screen minimization, protected-window behavior, explicit indicators, per-app/profile capture policy, and user-reviewable local redaction before sharing.
+
+## 21. Validation and Qualification
 
 Implementation status must be established by evidence. At minimum, qualification work should evaluate:
 
@@ -296,27 +356,32 @@ Implementation status must be established by evidence. At minimum, qualification
 - boot and recovery behavior;
 - SELinux enforcing state for release qualification;
 - Verified Boot and signing behavior;
-- encryption and credential behavior;
+- encryption, key-lifecycle, and credential behavior;
 - A/B update, rollback, and failure recovery;
 - application-role/default-app contracts;
 - Android compatibility and CTS/VTS or equivalent applicable validation strategy;
-- permissions, privacy, profile, and network-policy enforcement;
+- permissions, privacy, profile, ephemeral-session, clone, and network-policy enforcement;
 - browser/WebView security posture;
-- cellular, Wi-Fi, Bluetooth, NFC, GNSS, camera, audio, sensors, USB, biometrics, and other hardware functions applicable to each supported device;
+- baseband-facing boundaries, cellular, SIM/eSIM, Wi-Fi, Bluetooth, NFC/UWB, GNSS, camera, audio, sensors, USB, biometrics, hotspot/tethering, and other hardware functions applicable to each supported device;
+- DNS, VPN, connection-monitoring, and firewall-policy behavior;
+- package provenance, signing lineage, sideloading controls, and release supply-chain evidence;
 - accessibility and adaptive-layout behavior;
-- backup and restore behavior;
-- Privacy Shield, Wardveil, Everkeep, Identity, Mesh, and Manager integrations only when actually present;
+- secure time behavior where relied upon for security decisions;
+- backup, restore, factory-reset, and ownership-transfer behavior;
+- Privacy Shield, Wardveil, Everkeep, Identity, Mesh, DNS, and Manager integrations only when actually present;
 - performance, battery, thermal, reliability, and regression behavior.
 
 A successful boot, UI screenshot, package presence, or documentation entry is not sufficient evidence of production readiness or Stable qualification.
 
-## 21. Production-Acceptance Boundaries
+## 22. Production-Acceptance Boundaries
 
 GoreeCloud OS Mobile must not be represented as Stable until the applicable GoreeCloud lifecycle, security, privacy, validation, update, recovery, device-support, signing, provenance, and release requirements are satisfied with authoritative evidence.
 
 Development devices with unlocked bootloaders do not prove that production relocking is safe. Proposed compatibility mechanisms do not prove third-party application compatibility. Planned Privacy Shield or Wardveil surfaces do not prove runtime enforcement. Backup configuration does not prove recoverability. A feature remains Planned until implementation and validation evidence supports promotion.
 
-## 22. Maintenance
+Hardware-specific claims such as baseband isolation, MTE, StrongBox, UWB, secure-element use, eSIM handling, or hardware-backed attestation must remain conditional on verified support for the exact device and release.
+
+## 23. Maintenance
 
 Update this specification whenever material changes affect product scope, architecture, Android platform target, device support, security/privacy requirements, system integrations, APIs, update architecture, recovery, application compatibility, planned capabilities, validation obligations, or qualification boundaries.
 
@@ -328,7 +393,7 @@ Keep this file synchronized with:
 - applicable GoreeCloud governance;
 - GoreeCloud Tasks Management when actionable work is formally tracked.
 
-## 23. Vision
+## 24. Vision
 
 GoreeCloud OS Mobile should take AOSP and transform it into a deeply hardened, privacy-first, user-controlled mobile platform in which security and privacy are enforced throughout the operating-system architecture rather than added as optional utilities.
 
