@@ -1,0 +1,40 @@
+# GoreeCloud file version: 0.1.0-dev1
+name: OS Mobile Platform Foundation
+
+on:
+  pull_request:
+    paths:
+      - 'aosp-overlay/**'
+      - 'platform/**'
+      - 'scripts/**'
+      - 'docs/development/**'
+      - 'README.md'
+      - 'FEATURES.md'
+      - 'BENEFITS.md'
+      - 'COMPETITIVE-OBJECTIVES.md'
+      - '.github/workflows/platform-foundation.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'aosp-overlay/**'
+      - 'platform/**'
+      - 'scripts/**'
+      - 'docs/development/**'
+      - 'README.md'
+      - 'FEATURES.md'
+      - 'BENEFITS.md'
+      - 'COMPETITIVE-OBJECTIVES.md'
+      - '.github/workflows/platform-foundation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-foundation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate repository foundation and upstream AOSP pin
+        run: bash scripts/validate-platform-foundation.sh --verify-upstream
