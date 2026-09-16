@@ -1,0 +1,14 @@
+# GoreeCloud file version: 0.1.0-dev1
+# Repository-local generated and developer state.
+.DS_Store
+*.log
+*.tmp
+*.swp
+.env
+.env.*
+!.env.example
+!.env.template
+out/
+dist/
+build/
+aosp-worktree/
